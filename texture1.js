@@ -2,7 +2,7 @@ const r = require("raylib");
 
 function setup() {
     const screen = {
-        width: 800,
+        width: 1000,
         height: 800,
         title: "Texture",
         fps: 50,
@@ -20,22 +20,58 @@ function setup() {
         radius: 100,
     };
 
-    return { screen, circle };
-}
-
-function draw(world) {
     const target = r.LoadRenderTexture(300, 200);
 
     r.BeginTextureMode(target);
+    r.ClearBackground(r.BLACK);
 
-    r.DrawCircle(150, 100, 50, r.RED);
+    r.DrawCircle(150, 100, 60, r.RED);
+    r.DrawCircle(130, 80, 15, r.WHITE);
 
     r.EndTextureMode();
 
-    r.BeginDrawing();
-    r.ClearBackground(r.BLACK);
+    return { screen, circle, target };
+}
 
-    r.DrawTexture(target.texture, 0, 0, r.WHITE);
+function draw(world) {
+    r.BeginDrawing();
+    r.ClearBackground(r.DARKGRAY);
+
+    const rectangle = {
+        x: 100,
+        y: 50,
+        width: 100,
+        height: 100,
+    };
+    const hFlipRec = {
+        x: 0,
+        y: 0,
+        width: -300,
+        height: 200,
+    };
+    const vFlipRec = {
+        x: 0,
+        y: 0,
+        width: 300,
+        height: -200,
+    };
+
+    r.DrawTexture(world.target.texture, 50, 50, r.WHITE);
+    r.DrawTexture(world.target.texture, 300, 50, r.WHITE);
+    r.DrawTexture(world.target.texture, 550, 50, r.WHITE);
+    r.DrawTextureRec(
+        world.target.texture,
+        rectangle,
+        { x: 300, y: 300 },
+        r.WHITE,
+    );
+    r.DrawTextureRec(
+        world.target.texture,
+        hFlipRec,
+        { x: 500, y: 300 },
+        r.WHITE,
+    );
+    r.DrawTextureRec(world.target.texture, vFlipRec, { x: 0, y: 500 }, r.WHITE);
 
     r.EndDrawing();
 }
