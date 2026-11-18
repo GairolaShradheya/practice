@@ -66,6 +66,12 @@ const testCases = [
         title: "nested same object",
     },
     {
+        val1: { a: 1, b: 1 },
+        val2: { a: 1, b: 2 },
+        expectedOutput: false,
+        title: "Object with different values",
+    },
+    {
         val1: { a: undefined, c: 6 },
         val2: { b: 1, c: 9 },
         expectedOutput: false,
@@ -98,7 +104,7 @@ const testCases = [
     {
         val1: NaN,
         val2: NaN,
-        expectedOutput: false,
+        expectedOutput: true,
         title: "NaN",
     },
 ];
